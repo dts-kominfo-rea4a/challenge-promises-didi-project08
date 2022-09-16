@@ -1,58 +1,23 @@
 const { promiseTheaterIXX, promiseTheaterVGC } = require("./external.js");
 
 // TODO: Buat fungsi promiseOutput sesuai ketentuan readme
-const promiseOutput = (param) => {
-  const resultIXX = promiseTheaterIXX()
-  const resultVGC = promiseTheaterVGC()
-  const checkPromiseVGC = new Promise((resolve, reject) => {
-    (resultVGC === null) ? reject("Data tidak ditemukan !") : resolve(resultVGC)
-  })
-  const checkPromiseIXX = new Promise((resolve, reject) => {
-    (resultIXX === null) ? reject("Data tidak ditemukan !") : resolve(resultIXX)
-  })
+const promiseOutput = async (emosi) => {
 
-  let totalIXX = 0
-  let totalVGC = 0
+  const theaterIXX = await promiseTheaterIXX();
+  const theaterVGC = await promiseTheaterVGC();
 
-  checkPromiseIXX.then((result) => {
-    let arrIXX = []
-    result.forEach(TheaterIXX = (i, array) => {
-      let result = i.hasil
-      arrIXX.push(result)
-    })
+  const joinTheater = [...theaterIXX, ...theaterVGC]
 
-    totalIXX = arrIXX.filter(x => x === param).length;
-  }).catch((error) => {
-    console.log(error)
+  let countEmosi = 0;
+
+  joinTheater.forEach((film) => {
+    if (film.hasil === emosi) {
+      countEmosi++;
+    }
   })
 
-  checkPromiseVGC.then((result) => {
-    let arrVGC = []
-    result.forEach(TheaterVGC = (i, array) => {
-      let result = i.hasil
-      arrVGC.push(result)
-    })
+  return countEmosi;
 
-    totalVGC = arrVGC.filter(x => x === param).length;
-  }).catch((error) => {
-    console.log(error)
-  })
-
-  setTimeout(function(){
-    const promises = new Promise((resolve, reject) => {
-      (totalIXX === null && totalVGC === null) ? reject("Data tidak ditemukan !") : resolve(totalIXX+totalVGC)
-    })
-
-    promises.then((result) => {
-      setTimeout(() => {
-        console.log(result);
-      }, 1);
-      
-      return result
-    }).catch((error) => {
-      console.log(error)
-    })
-  },300)
 };
 
 module.exports = {
