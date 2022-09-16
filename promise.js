@@ -39,7 +39,19 @@ const promiseOutput = (param) => {
   })
 
   setTimeout(function(){
-    console.log(totalIXX+totalVGC)
+    const promises = new Promise((resolve, reject) => {
+      (totalIXX === null && totalVGC === null) ? reject("Data tidak ditemukan !") : resolve(totalIXX+totalVGC)
+    })
+
+    promises.then((result) => {
+      setTimeout(() => {
+        console.log(result);
+      }, 1);
+      
+      return result
+    }).catch((error) => {
+      console.log(error)
+    })
   },300)
 };
 

@@ -1,5 +1,8 @@
 const { promiseOutput } = require("./promise.js");
 
+// promiseOutput("tidak marah")
+// promiseOutput("marah")
+
 describe("promiseOutput test", () => {
   it("promiseOutput is a function", async () => {
     expect(promiseOutput).toBeInstanceOf(Function);
