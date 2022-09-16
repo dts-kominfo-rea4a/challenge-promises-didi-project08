@@ -6,7 +6,7 @@ const promiseOutput = async (emosi) => {
   const theaterIXX = await promiseTheaterIXX();
   const theaterVGC = await promiseTheaterVGC();
 
-  const joinTheater = [...theaterIXX, ...theaterVGC]
+  const joinTheater = theaterIXX.concat(theaterVGC)
 
   let countEmosi = 0;
 
@@ -19,6 +19,8 @@ const promiseOutput = async (emosi) => {
   return countEmosi;
 
 };
+
+console.log(promiseOutput('marah'))
 
 module.exports = {
   promiseOutput,
