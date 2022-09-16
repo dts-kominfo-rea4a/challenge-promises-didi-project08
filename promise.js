@@ -13,12 +13,14 @@ const promiseOutput = (param) => {
 
   checkPromiseIXX.then((result) => {
     let arrIXX = []
+    let totalIXX = 0
+    let totalVGC = 0
     result.forEach(TheaterIXX = (i, array) => {
       let result = i.hasil
       arrIXX.push(result)
     })
 
-    const emosiTheaterIXX = arrIXX.filter(x => x === param).length;
+    totalIXX = arrIXX.filter(x => x === param).length;
 
     checkPromiseVGC.then((result) => {
       let arrVGC = []
@@ -27,11 +29,9 @@ const promiseOutput = (param) => {
         arrVGC.push(result)
       })
   
-      const emosiTheaterVGC = arrVGC.filter(x => x === param).length;
-      const totalEmosi = (emosiTheaterIXX + emosiTheaterVGC)
-      const stringXIIAndVGC = "Jumlah emosi "+param+" ada: "
-      
-      console.log(stringXIIAndVGC + totalEmosi)
+      totalVGC = arrVGC.filter(x => x === param).length;
+
+      console.log(totalIXX + totalVGC)
     }).catch((error) => {
       console.log(error)
     })
@@ -39,11 +39,7 @@ const promiseOutput = (param) => {
   }).catch((error) => {
     console.log(error)
   })
-
 };
-
-promiseOutput('marah')
-promiseOutput('tidak marah')
 
 module.exports = {
   promiseOutput,
